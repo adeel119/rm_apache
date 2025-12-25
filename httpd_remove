@@ -1,5 +1,5 @@
 ---
-- name: Manage Essential Services
+- name: Stop and remove httpd
   hosts: all
   become: yes
   tasks:
