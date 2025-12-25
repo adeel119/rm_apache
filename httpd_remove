@@ -1,0 +1,16 @@
+---
+- name: Manage Essential Services
+  hosts: all
+  become: yes
+  tasks:
+    - name: Stop httpd service
+      ansible.builtin.systemd:
+        name: "{{ httpd }}"
+        state: stopped
+      when: service_action == 'stop'
+
+    - name: Remove the service package
+      ansible.builtin.yum:
+        name: "{{ httpd }}"
+        state: absent
+      when: service_action == 'remove'
