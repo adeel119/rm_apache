@@ -2,13 +2,17 @@
 - name: Stop and remove httpd
   hosts: all
   become: yes
+
   tasks:
     - name: Stop httpd service
       ansible.builtin.systemd:
         name: httpd
-        state: stopped 
+        state: stopped
+      when: service_action == 'stop'
 
     - name: Remove the service package
       ansible.builtin.dnf:
         name: httpd
         state: absent
+      when: service_action == 'remove'
+
